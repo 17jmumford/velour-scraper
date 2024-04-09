@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: An example AWS SAM template for a Python Lambda function.
+
+Resources:
+  VelourScraper:
+    Type: AWS::Serverless::Function 
+    Properties:
+      FunctionName: velour-scraper
+      Handler: velour_scraper.lambda_handler
+      Runtime: python3.9
+      MemorySize: 128
+      Timeout: 30
+      Description: A scraper of the velour website that runs on a cron job.
+      # Define your function's IAM role here
+      Role: arn:aws:iam::868253984511:role/velour-scraper-role
+      # If your function needs access to other AWS services, define the necessary policies here
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonS3FullAccess
+      CodeUri: .
+      Environment:
+
+Outputs:
+  VelourScraper:
+    Description: "Velour Scraper Function ARN"
+    Value: !GetAtt VelourScraper.Arn
+
+  VelourScraperIamRole:
+    Description: "Implicit IAM Role created for Velour Scraper"
+    Value: !GetAtt VelourScraperRole.Arn
