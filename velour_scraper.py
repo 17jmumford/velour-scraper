@@ -30,7 +30,6 @@ def get_spotify_bearer_token() -> str:
             'client_id': os.environ['SpotifyClientID'],
             'client_secret': os.environ['SpotifyClientSecret']}
     response = requests.post(url, headers=headers, data=data)
-    print(response.json())
     return response.json()['access_token']
 
 def fetch_spotify_data(bearer_token: str, artist_name: str) -> dict[str, Any]:
@@ -111,7 +110,6 @@ def get_velour_events(full_url: str, spotify_bearer_token: str) -> list[str]:
               spotify_data.append(fetch_spotify_data(spotify_bearer_token, artist))
             cleaned_event['spotify_data'] = spotify_data
             full_event = {date: cleaned_event}
-            print("adding event: ", full_event)
             event_list.append(full_event)
     return event_list
 
