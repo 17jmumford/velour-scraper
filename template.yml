@@ -4,7 +4,7 @@ Description: An example AWS SAM template for a Python Lambda function.
 
 Globals:
   Function:
-    Timeout: 120
+    Timeout: 600
     MemorySize: 128
 
 Parameters:
